@@ -13,10 +13,11 @@ class HomePage extends StatelessWidget {
     final BottomNavController bottomNavController = Get.put(BottomNavController());
 
     final List<Widget> menus = [
-      const Home(),
-      const Discover(),
-      const Favorites(),
-    ];
+  Home(),       // No 'const'
+  Discover(),   // No 'const'
+  Favorites(),  // No 'const'
+];
+
 
     return Obx(() {
       return Scaffold(
@@ -24,6 +25,9 @@ class HomePage extends StatelessWidget {
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: bottomNavController.selectedIndex.value,
           onTap: bottomNavController.changeIndexMenu,
+          backgroundColor: Colors.orange, // Set background color to orange
+          selectedItemColor: Colors.white, // Set selected item color to white
+          unselectedItemColor: Colors.white, // Set unselected item color to white
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined), 

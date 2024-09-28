@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:apps_food/controller/bottom_nav_binding.dart';
 import 'package:apps_food/home_page.dart';
 import 'package:apps_food/login_page.dart';
 
@@ -17,7 +18,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => const LoginPage()),
-        GetPage(name: '/homepage', page: () => const HomePage()),
+        GetPage(
+          name: '/homepage',
+          page: () => const HomePage(),
+          binding: BottomNavBinding(), // Pastikan binding sudah ada
+        ),
       ],
     );
   }
