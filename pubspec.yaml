@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   get: ^4.6.5  # tambahkan dependensi GetX
   cupertino_icons: ^1.0.8  # hanya satu kali
+  shared_preferences: ^2.0.10 
 
 dev_dependencies:
   flutter_test:
@@ -23,3 +24,8 @@ flutter:
   assets:
     - assets/title.png
     - assets/profile.jpeg
+    - assets/cafe.jpeg
+    - assets/esteh.jpg
+    - assets/fedchiken.jpeg
+    - assets/pozza.jpg
+    - assets/shawarma.jpeg
