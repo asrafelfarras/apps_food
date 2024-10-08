@@ -7,11 +7,11 @@ class RestaurantCard extends StatefulWidget {
   final double distance;
 
   const RestaurantCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.restaurantName,
     required this.distance,
-  }) : super(key: key);
+  });
 
   @override
   _RestaurantCardState createState() => _RestaurantCardState();
@@ -44,37 +44,55 @@ class _RestaurantCardState extends State<RestaurantCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Row(
-        children: [
-          Image.asset(
-            widget.imageUrl,
-            width: 100,
-            height: 100,
-            fit: BoxFit.cover,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0), // Rounded corners
+        side: const BorderSide(color: Colors.black), // Black border
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          children: [
+            // Restaurant Image
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.0), // Rounded image corners
+              child: Image.asset(
+                widget.imageUrl,
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(width: 10), // Space between image and text
+            // Restaurant Details
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     widget.restaurantName,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  Text('${widget.distance} km away'),
+                  const SizedBox(height: 5),
+                  Text(
+                    '${widget.distance} km away',
+                    style: const TextStyle(color: Colors.grey),
+                  ),
                 ],
               ),
             ),
-          ),
-          IconButton(
-            icon: Icon(
-              isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: isFavorite ? Colors.red : Colors.grey,
+            // Favorite Icon (Heart)
+            IconButton(
+              icon: Icon(
+                isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: isFavorite ? Colors.red : Colors.grey,
+              ),
+              onPressed: _toggleFavorite, // Toggle favorite status
             ),
-            onPressed: _toggleFavorite,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

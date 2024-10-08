@@ -10,7 +10,7 @@ class LoginPage extends StatelessWidget {
       body: Container(
         width: double.infinity, // Ensure it takes the full width
         height: double.infinity, // Ensure it takes the full height
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.orange, Colors.deepOrange], // Gradient colors
             begin: Alignment.topLeft,
@@ -39,7 +39,7 @@ class LoginPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle, // Make the shape circular
                   border: Border.all(color: Colors.white, width: 4), // Border color and width
-                  image: DecorationImage(
+                  image: const DecorationImage(
                     image: AssetImage('assets/profile.jpeg'), // Change to your actual image path
                     fit: BoxFit.cover, // Ensure the image fits nicely
                   ),
@@ -47,9 +47,9 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             // Add the welcome text below the profile image
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0), // Add spacing if needed
-              child: const Text(
+            const Padding(
+              padding: EdgeInsets.only(top: 20.0), // Add spacing if needed
+              child: Text(
                 "Welcome back,\nEl Farras",
                 style: TextStyle(
                   fontSize: 24, // Adjust the font size as necessary

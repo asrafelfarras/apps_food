@@ -13,9 +13,9 @@ class HomePage extends StatelessWidget {
     final BottomNavController bottomNavController = Get.put(BottomNavController());
 
     final List<Widget> menus = [
-  Home(),       // No 'const'
-  Discover(),   // No 'const'
-  Favorites(),  // No 'const'
+  const Home(),       // No 'const'
+  const Discover(),   // No 'const'
+  const Favorites(),  // No 'const'
 ];
 
 

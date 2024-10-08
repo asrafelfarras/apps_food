@@ -31,9 +31,9 @@ class Home extends StatelessWidget {
                 ),
                 const SizedBox(width: 16), // Add spacing between image and text
                 // Profile Details (Username and Foodie Level)
-                Column(
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       'El Farras',
                       style: TextStyle(
@@ -56,27 +56,27 @@ class Home extends StatelessWidget {
           ),
 
           // Restaurant Cards
-          RestaurantCard(
+          const RestaurantCard(
             imageUrl: 'assets/cafe.jpeg',
             restaurantName: 'Luminous Cafe',
             distance: 0.5,
           ),
-          RestaurantCard(
+          const RestaurantCard(
             imageUrl: 'assets/esteh.jpg',
             restaurantName: 'Teh Kutha',
             distance: 1.2,
           ),
-          RestaurantCard(
+          const RestaurantCard(
             imageUrl: 'assets/fedchiken.jpeg',
             restaurantName: 'Pragos Fried Chicken',
             distance: 2.0,
           ),
-          RestaurantCard(
+          const RestaurantCard(
             imageUrl: 'assets/pozza.jpg',
             restaurantName: 'Pizza Mamamia',
             distance: 0.9,
           ),
-          RestaurantCard(
+          const RestaurantCard(
             imageUrl: 'assets/shawarma.jpeg',
             restaurantName: 'Abdul`s Shawarma',
             distance: 1.8,
