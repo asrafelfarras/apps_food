@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:apps_food/database_helper.dart';
 import 'package:apps_food/widgets/restaurant_card.dart';
 
 class Favorites extends StatefulWidget {
@@ -19,29 +19,7 @@ class FavoritesState extends State<Favorites> {
   }
 
   Future<void> _loadFavoriteRestaurants() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    List<Map<String, dynamic>> favorites = [];
-
-    Map<String, Map<String, dynamic>> allRestaurants = {
-      'Luminous Cafe': {'imageUrl': 'assets/cafe.jpeg', 'distance': 0.5},
-      'Teh Kutha': {'imageUrl': 'assets/esteh.jpg', 'distance': 1.2},
-      'Pragos Fried Chicken': {'imageUrl': 'assets/fedchiken.jpeg', 'distance': 2.0},
-      'Pizza Mamamia': {'imageUrl': 'assets/pozza.jpg', 'distance': 0.9},
-      'Abdul`s Shawarma': {'imageUrl': 'assets/shawarma.jpeg', 'distance': 1.8},
-    };
-
-    // Check for each restaurant if it is favorited
-    for (var restaurant in allRestaurants.entries) {
-      if (prefs.getBool(restaurant.key) == true) {
-        favorites.add({
-          'restaurantName': restaurant.key,
-          'imageUrl': restaurant.value['imageUrl'],
-          'distance': restaurant.value['distance'],
-        });
-      }
-    }
-
+    final favorites = await DatabaseHelper().getFavorites();
     setState(() {
       favoriteRestaurants = favorites;
     });

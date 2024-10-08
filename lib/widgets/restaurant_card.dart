@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:apps_food/database_helper.dart';
 
 class RestaurantCard extends StatefulWidget {
   final String imageUrl;
@@ -27,18 +27,50 @@ class _RestaurantCardState extends State<RestaurantCard> {
   }
 
   Future<void> _loadFavoriteStatus() async {
-    final prefs = await SharedPreferences.getInstance();
+    final favorites = await DatabaseHelper().getFavorites();
     setState(() {
-      isFavorite = prefs.getBool(widget.restaurantName) ?? false;
+      isFavorite = favorites.any((favorite) => favorite['restaurantName'] == widget.restaurantName);
     });
   }
 
   Future<void> _toggleFavorite() async {
-    final prefs = await SharedPreferences.getInstance();
+    if (isFavorite) {
+      // Show confirmation dialog before un-favoriting
+      final confirmed = await _showUnfavoriteDialog();
+      if (!confirmed) return; // User did not confirm, exit
+      await DatabaseHelper().deleteFavorite(widget.restaurantName);
+    } else {
+      await DatabaseHelper().insertFavorite({
+        'restaurantName': widget.restaurantName,
+        'imageUrl': widget.imageUrl,
+        'distance': widget.distance,
+      });
+    }
     setState(() {
       isFavorite = !isFavorite;
-      prefs.setBool(widget.restaurantName, isFavorite);
     });
+  }
+
+  Future<bool> _showUnfavoriteDialog() async {
+    return await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirm Unfavorite'),
+          content: const Text('Apakah anda ingin menghapus restoran ini dari favorites?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false), // Return false
+              child: const Text('Tidak'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true), // Return true
+              child: const Text('Iya'),
+            ),
+          ],
+        );
+      },
+    ) ?? false; // Default to false if dialog is dismissed
   }
 
   @override

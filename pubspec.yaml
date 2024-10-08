@@ -9,9 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  get: ^4.6.5  # tambahkan dependensi GetX
+  get: ^4.6.6  # tambahkan dependensi GetX
   cupertino_icons: ^1.0.8  # hanya satu kali
   shared_preferences: ^2.0.10 
+  sqflite: ^2.4.0
 
 dev_dependencies:
   flutter_test:
